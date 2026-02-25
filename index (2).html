@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axe Compétences | Accompagnement sur mesure</title>
+  <meta name="description" content="Axe Compétences - Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions professionnelles à Villeneuve d'Ascq.">
+  <meta name="keywords" content="accompagnement, coaching, bilan de compétences, transition professionnelle, Villeneuve d'Ascq, formation">
+  <meta property="og:title" content="Axe Compétences | Accompagnement sur mesure">
+  <meta property="og:description" content="Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions professionnelles.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/hero.jpg">
+  <link rel="icon" type="image/png" href="images/logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-deep: #1a2332;
+      --color-navy: #2c3e5a;
+      --color-slate: #4a5568;
+      --color-muted: #718096;
+      --color-warm: #c49a6c;
+      --color-warm-light: #d4ad82;
+      --color-warm-glow: rgba(196, 154, 108, 0.12);
+      --color-cream: #faf8f5;
+      --color-ivory: #f5f1eb;
+      --color-white: #ffffff;
+      --color-border: rgba(196, 154, 108, 0.2);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Nunito Sans', sans-serif;
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: var(--color-slate);
+      background: var(--color-cream);
+      line-height: 1.75;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      transition: var(--transition);
+    }
+    .nav.scrolled { box-shadow: 0 4px 30px rgba(26, 35, 50, 0.06); }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .nav-brand .logo { height: 42px; width: auto; object-fit: contain; }
+    .nav-brand .logo-secondary { height: 36px; width: auto; object-fit: contain; }
+    .nav-brand-text {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 500;
+      color: var(--color-deep);
+      letter-spacing: 0.02em;
+    }
+    .nav-brand-text span { color: var(--color-warm); }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-navy);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color var(--transition);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--color-warm);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--color-warm); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      width: 24px; height: 2px;
+      background: var(--color-deep);
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--color-deep) 0%, var(--color-navy) 50%, #3a5274 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(196,154,108,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(58,82,116,0.4) 0%, transparent 50%);
+      z-index: 1;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 80%; height: 200%;
+      background: radial-gradient(ellipse, rgba(196,154,108,0.06) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-text { animation: fadeInUp 1s ease-out; }
+    .hero-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--color-warm);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-label::before { content: ''; width: 40px; height: 1px; background: var(--color-warm); }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: var(--color-white);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--color-warm-light); }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+
+    .hero-image {
+      position: relative;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    }
+    .hero-image::before {
+      content: '';
+      position: absolute;
+      top: -15px; right: -15px;
+      width: 100%; height: 100%;
+      border: 1px solid rgba(196,154,108,0.3);
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 1rem 2.2rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+      border-radius: 2px;
+    }
+    .btn-primary { background: var(--color-warm); color: var(--color-white); }
+    .btn-primary:hover {
+      background: var(--color-warm-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(196,154,108,0.35);
+    }
+    .btn-arrow::after { content: '→'; transition: transform var(--transition); }
+    .btn-arrow:hover::after { transform: translateX(4px); }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--color-warm);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 400;
+      color: var(--color-deep);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===== CAP CLAIR ===== */
+    .cap-section { background: var(--color-white); }
+    .cap-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .cap-text blockquote {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--color-warm);
+      border-left: 3px solid var(--color-warm);
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+    .cap-text p { margin-bottom: 1.2rem; color: var(--color-slate); line-height: 1.85; }
+
+    /* ===== SITUATIONS ===== */
+    .situations { background: var(--color-cream); }
+    .situations-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+    .situation-card {
+      background: var(--color-white);
+      padding: 2.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .situation-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--color-warm);
+      transition: height var(--transition);
+    }
+    .situation-card:hover::before { height: 100%; }
+    .situation-card:hover {
+      box-shadow: 0 12px 40px rgba(26,35,50,0.08);
+      transform: translateY(-3px);
+    }
+    .situation-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--color-deep);
+      margin-bottom: 1rem;
+    }
+    .situation-card h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-warm);
+      margin-bottom: 1.2rem;
+    }
+    .situation-card p { color: var(--color-muted); line-height: 1.8; font-size: 0.95rem; }
+
+    /* ===== APPROACH ===== */
+    .approach {
+      background: linear-gradient(170deg, var(--color-deep) 0%, var(--color-navy) 100%);
+      color: var(--color-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .approach::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 40%; height: 100%;
+      background: radial-gradient(ellipse at center, rgba(196,154,108,0.08) 0%, transparent 70%);
+    }
+    .approach .section-title { color: var(--color-white); }
+    .approach-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    .approach-col p { color: rgba(255,255,255,0.75); line-height: 1.9; font-size: 0.97rem; }
+    .approach-col h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--color-warm-light);
+      margin-bottom: 1rem;
+    }
+
+    /* ===== FORMATS ===== */
+    .formats { background: var(--color-white); }
+    .formats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .format-item {
+      padding: 2rem;
+      background: var(--color-cream);
+      border-radius: 4px;
+      border: 1px solid transparent;
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .format-item:hover {
+      border-color: var(--color-border);
+      background: var(--color-white);
+      box-shadow: 0 8px 30px rgba(26,35,50,0.06);
+      transform: translateY(-2px);
+    }
+    .format-icon {
+      width: 48px; height: 48px;
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--color-warm-glow);
+    }
+    .format-icon svg {
+      width: 22px; height: 22px;
+      stroke: var(--color-warm);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .format-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--color-deep);
+      line-height: 1.3;
+    }
+
+    /* ===== CTA BAND ===== */
+    .cta-band { background: var(--color-ivory); padding: 4rem 2rem; text-align: center; }
+    .cta-band p {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      color: var(--color-deep);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    .cta-band .sub {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--color-muted);
+      margin-bottom: 2rem;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact { background: var(--color-cream); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      margin-top: 3rem;
+    }
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-deep);
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail-icon {
+      width: 40px; height: 40px; min-width: 40px;
+      border-radius: 50%;
+      background: var(--color-warm-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-detail-icon svg {
+      width: 18px; height: 18px;
+      stroke: var(--color-warm);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .contact-detail a {
+      color: var(--color-navy);
+      text-decoration: none;
+      transition: color var(--transition);
+      font-size: 0.95rem;
+    }
+    .contact-detail a:hover { color: var(--color-warm); }
+    .contact-detail small {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ===== FORM (mailto) ===== */
+    .contact-form {
+      background: var(--color-white);
+      padding: 2.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
+    }
+    .contact-form h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--color-deep);
+      margin-bottom: 0.5rem;
+    }
+    .contact-form .form-intro {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      margin-bottom: 1.8rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-navy);
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: var(--color-deep);
+      background: var(--color-cream);
+      border: 1px solid transparent;
+      border-radius: 2px;
+      transition: all var(--transition);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--color-warm);
+      background: var(--color-white);
+      box-shadow: 0 0 0 3px var(--color-warm-glow);
+    }
+    .form-group textarea { min-height: 120px; resize: vertical; }
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .form-submit { margin-top: 0.5rem; }
+    .form-privacy {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      margin-top: 1rem;
+      line-height: 1.5;
+    }
+    .form-privacy svg {
+      width: 14px; height: 14px;
+      stroke: var(--color-warm);
+      fill: none;
+      stroke-width: 1.5;
+      vertical-align: -2px;
+      margin-right: 4px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--color-deep);
+      color: rgba(255,255,255,0.6);
+      padding: 3rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-brand-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .footer-brand-area img { height: 32px; width: auto; opacity: 0.9; }
+    .footer-brand-text {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--color-white);
+    }
+    .footer-brand-text span { color: var(--color-warm); }
+    .footer p { font-size: 0.88rem; line-height: 1.7; }
+    .footer h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--color-warm-light);
+      margin-bottom: 1rem;
+    }
+    .footer a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color var(--transition);
+      font-size: 0.88rem;
+    }
+    .footer a:hover { color: var(--color-warm-light); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; padding-top: 7rem; }
+      .hero-image { display: none; }
+      .situations-grid, .approach-columns, .contact-grid { grid-template-columns: 1fr; }
+      .formats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px; left: 0; right: 0;
+        background: var(--color-cream);
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      }
+      .nav-toggle { display: flex; }
+      .formats-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.25rem; }
+      .nav-brand .logo-secondary { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAVIGATION ====== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <!-- ★ REMPLACER : images/logo1.png et images/logo2.png -->
+        <img src="images/logo1.png" alt="Axe Compétences" class="logo">
+        <img src="images/logo2.png" alt="" class="logo-secondary">
+        <span class="nav-brand-text">Axe <span>Compétences</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#accompagner" class="active">Vous accompagner</a></li>
+        <li><a href="#situations">Situations</a></li>
+        <li><a href="#demarche">Notre démarche</a></li>
+        <li><a href="#formats">Formats</a></li>
+        <li><a href="#contact">Nous contacter</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="accompagner">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-label">Accompagnement sur mesure</div>
+        <h1>L'accompagnement<br><em>qui vous éclaire</em></h1>
+        <p class="hero-description">
+          Certaines situations ressemblent à un nœud de relations, d'informations et de décisions.
+          Ces moments charnières demandent simplement de s'arrêter un instant, de prendre du recul
+          et d'y voir plus clair.
+        </p>
+        <a href="#contact" class="btn btn-primary btn-arrow">Se rencontrer</a>
+      </div>
+      <div class="hero-image">
+        <!-- ★ REMPLACER : images/hero.jpg (paysage, min 800×600) -->
+        <img src="images/hero.jpg" alt="Accompagnement professionnel - Axe Compétences" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CAP CLAIR ====== -->
+  <section class="cap-section" id="cap">
+    <div class="section-inner">
+      <div class="section-label reveal">Cap Clair</div>
+      <h2 class="section-title reveal">Un cap à clarifier ?</h2>
+      <div class="cap-grid">
+        <div class="cap-text reveal">
+          <blockquote>Dans ces moments, Cap Clair propose un espace de travail et de recul, à la croisée de vos dimensions personnelles et professionnelles.</blockquote>
+          <p>Ces moments charnières demandent simplement de s'arrêter un instant, de prendre du recul et d'y voir plus clair.</p>
+          <p>Cap Clair est un espace de travail et de recul, à la croisée de vos dimensions personnelles et professionnelles. Il permet d'éclairer les choix, les tensions et les transitions avec justesse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SITUATIONS ====== -->
+  <section class="situations" id="situations">
+    <div class="section-inner">
+      <div class="section-label reveal">Les situations qui peuvent vous concerner</div>
+      <h2 class="section-title reveal">Pour les particuliers<br>et les organisations</h2>
+      <div class="situations-grid">
+        <div class="situation-card reveal">
+          <h4>Particuliers</h4>
+          <h3>Vos questionnements personnels</h3>
+          <p>Jeunes adultes en questionnement, actifs en transition ou en tension, seniors à un moment de bascule. Les échanges peuvent porter sur la trajectoire professionnelle, le développement personnel et relationnel, ou encore le rapport au sens, aux transitions et aux choix de vie importants.</p>
+        </div>
+        <div class="situation-card reveal">
+          <h4>Organisations</h4>
+          <h3>Vos enjeux collectifs</h3>
+          <p>Dirigeants, responsables et équipes confrontés à des situations délicates, à des projets sensibles ou à des phases d'évolution. Les échanges concernent la posture de responsabilité, les dynamiques relationnelles et managériales, ainsi que les phases de transformation ou de redéfinition collective.</p>
+        </div>
+        <div class="situation-card reveal">
+          <h4>Enjeux particuliers</h4>
+          <h3>Trajectoire et choix de carrière</h3>
+          <p>Reconversion, période de questionnement, préparation de la retraite, développement personnel et relationnel, rapport au sens et aux choix de vie importants.</p>
+        </div>
+        <div class="situation-card reveal">
+          <h4>Enjeux organisations</h4>
+          <h3>Posture et prise de décision</h3>
+          <p>Posture de responsabilité et prise de décision, dynamiques relationnelles et managériales, phases de transformation, de tension ou de redéfinition collective.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== APPROACH ====== -->
+  <section class="approach" id="demarche">
+    <div class="section-inner">
+      <div class="section-label reveal" style="color: var(--color-warm-light);">Notre démarche</div>
+      <h2 class="section-title reveal">Un accompagnement ajusté,<br>une posture professionnelle exigeante</h2>
+      <div class="approach-columns">
+        <div class="approach-col reveal">
+          <h3>Démarche d'accompagnement</h3>
+          <p>Notre démarche est attentive aux mouvements subtils : à ce qui émerge dans l'échange, aux tensions discrètes, aux prises de conscience en devenir. Elle se déploie au rythme de la situation, dans le juste moment. La clarté n'est jamais seulement intellectuelle : elle naît dans le dialogue et l'expérience.</p>
+          <p style="margin-top: 1rem; color: var(--color-warm-light); font-style: italic;">En présence et/ou à distance.</p>
+        </div>
+        <div class="approach-col reveal">
+          <h3>Posture professionnelle</h3>
+          <p>Les accompagnements sont conduits par des intervenants expérimentés, issus des champs de la formation, de la gestion et de l'accompagnement des personnes et des organisations. Leur travail repose sur une écoute exigeante, une attention particulière aux moments clés, une solide expérience de terrain et une capacité à intervenir dans des contextes complexes, sans appliquer de solutions standardisées.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FORMATS ====== -->
+  <section class="formats" id="formats">
+    <div class="section-inner">
+      <div class="section-label reveal">Des formats adaptés</div>
+      <h2 class="section-title reveal">Formats d'accompagnement<br>adaptés à votre contexte</h2>
+      <div class="formats-grid">
+        <div class="format-item reveal">
+          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <h3>Accompagnement personnel et professionnel</h3>
+        </div>
+        <div class="format-item reveal">
+          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <h3>Bilans de parcours, de carrière ou de compétences</h3>
+        </div>
+        <div class="format-item reveal">
+          <div class="format-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
+          <h3>Coaching personnel et professionnel</h3>
+        </div>
+        <div class="format-item reveal">
+          <div class="format-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <h3>Transitions professionnelles</h3>
+        </div>
+        <div class="format-item reveal">
+          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <h3>Formations humaines et encadrement</h3>
+        </div>
+        <div class="format-item reveal">
+          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Accompagnement des dirigeants et des équipes</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <div class="cta-band">
+    <div class="section-inner reveal">
+      <p>Chaque accompagnement est ajusté à la situation rencontrée</p>
+      <p class="sub">Un premier échange permet de faire le point, simplement</p>
+      <a href="#contact" class="btn btn-primary btn-arrow">Prendre contact</a>
+    </div>
+  </div>
+
+  <!-- ====== CONTACT ====== -->
+  <section class="contact" id="contact">
+    <div class="section-inner">
+      <div class="section-label reveal">Nous contacter</div>
+      <h2 class="section-title reveal">Pour échanger sur une démarche<br>ajustée à votre situation</h2>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <h3>Se rencontrer</h3>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><a href="tel:+33684802902">06 84 80 29 02</a><small>Mobile</small></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><a href="tel:+33320312000">03 20 31 20 00</a><small>Bureau</small></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><a href="mailto:isabelle.alvin@axe-c.com">isabelle.alvin@axe-c.com</a></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <span style="color: var(--color-slate); font-size: 0.95rem;">1 bd de Valmy<br>59650 Villeneuve d'Ascq</span>
+              <small style="margin-top: 0.5rem;">12 rue Edouard Manet<br>59880 Saint Saulve</small>
+            </div>
+          </div>
+          <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--color-muted); font-style: italic;">Échanges possibles à distance ou en présence</p>
+        </div>
+
+        <!-- FORMULAIRE MAILTO — Aucune donnée ne quitte l'appareil -->
+        <div class="reveal">
+          <div class="contact-form">
+            <h3>Envoyez-nous un message</h3>
+            <p class="form-intro">Remplissez le formulaire. Votre messagerie s'ouvrira avec un email pré-rempli — aucune donnée n'est collectée.</p>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" placeholder="Votre prénom">
+              </div>
+              <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" placeholder="Votre nom">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="votre@email.com">
+              </div>
+              <div class="form-group">
+                <label for="telephone">Téléphone</label>
+                <input type="tel" id="telephone" placeholder="06 00 00 00 00">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sujet">Sujet</label>
+              <select id="sujet">
+                <option value="Demande d'information">Demande d'information</option>
+                <option value="Accompagnement personnel">Accompagnement personnel</option>
+                <option value="Accompagnement professionnel">Accompagnement professionnel</option>
+                <option value="Bilan de compétences">Bilan de compétences</option>
+                <option value="Coaching">Coaching</option>
+                <option value="Formation">Formation</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="besoin">Quel est votre besoin ?</label>
+              <textarea id="besoin" placeholder="Décrivez brièvement votre situation ou votre besoin..."></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="button" id="sendMailBtn" class="btn btn-primary btn-arrow" style="width:100%; justify-content:center;">Ouvrir mon email</button>
+            </div>
+            <p class="form-privacy">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Aucune donnée n'est collectée ni stockée. Le message est composé localement sur votre appareil.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-area">
+          <img src="images/logo1.png" alt="Axe Compétences">
+          <span class="footer-brand-text">Axe <span>Compétences</span></span>
+        </div>
+        <p>Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions et formations.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <p><a href="#accompagner">Vous accompagner</a></p>
+        <p style="margin-top:.5rem"><a href="#situations">Situations</a></p>
+        <p style="margin-top:.5rem"><a href="#demarche">Notre démarche</a></p>
+        <p style="margin-top:.5rem"><a href="#formats">Formats</a></p>
+        <p style="margin-top:.5rem"><a href="#contact">Contact</a></p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="tel:+33684802902">06 84 80 29 02</a></p>
+        <p style="margin-top:.5rem"><a href="mailto:isabelle.alvin@axe-c.com">isabelle.alvin@axe-c.com</a></p>
+        <p style="margin-top:1rem">1 bd de Valmy<br>59650 Villeneuve d'Ascq</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      AXE COMPETENCES – 1 bd de Valmy – 59650 VILLENEUVE D'ASCQ<br>
+      APE : 8559 A · N° déclaration d'activité Formation Professionnelle Continue : 32590972159 · SIRET : 832 416 275 00028
+    </div>
+  </footer>
+
+  <script>
+    /* ── Nav scroll ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
+
+    /* ── Mobile menu ── */
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      navToggle.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.classList.remove('open');
+    }));
+
+    /* ── Active link on scroll ── */
+    const sects = document.querySelectorAll('section[id]');
+    const anchors = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sects.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; });
+      anchors.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+      });
+    });
+
+    /* ── Scroll reveal ── */
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    /* ── MAILTO — zéro donnée côté serveur ── */
+    document.getElementById('sendMailBtn').addEventListener('click', function () {
+      const p = document.getElementById('prenom').value.trim();
+      const n = document.getElementById('nom').value.trim();
+      const e = document.getElementById('email').value.trim();
+      const t = document.getElementById('telephone').value.trim();
+      const s = document.getElementById('sujet').value;
+      const b = document.getElementById('besoin').value.trim();
+
+      if (!p || !n) {
+        alert('Merci de renseigner au moins votre prénom et votre nom.');
+        return;
+      }
+
+      const body = [
+        'Bonjour,',
+        '',
+        'Je me permets de vous contacter via votre site internet.',
+        '',
+        '── Coordonnées ──',
+        'Prénom : ' + p,
+        'Nom : ' + n,
+        e ? 'Email : ' + e : null,
+        t ? 'Téléphone : ' + t : null,
+        '',
+        '── Besoin ──',
+        b || '(non précisé)',
+        '',
+        'Cordialement,',
+        p + ' ' + n
+      ].filter(l => l !== null).join('\n');
+
+      window.location.href =
+        'mailto:isabelle.alvin@axe-c.com'
+        + '?subject=' + encodeURIComponent('[Axe Compétences] ' + s + ' — ' + p + ' ' + n)
+        + '&body=' + encodeURIComponent(body);
+    });
+  </script>
+</body>
+</html>
