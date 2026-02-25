@@ -10,7 +10,6 @@
   <meta property="og:description" content="Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions professionnelles.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="images/hero.jpg">
-  <link rel="icon" type="image/png" href="images/logo1.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -33,8 +32,8 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
 
+    /* PAS de scroll-behavior smooth sur le html pour éviter le scroll auto */
     body {
       font-family: var(--font-body);
       font-weight: 300;
@@ -44,6 +43,10 @@
       font-size: 16px;
       overflow-x: hidden;
     }
+
+    /* Activer smooth scroll seulement après le chargement */
+    body.loaded { scroll-behavior: smooth; }
+    body.loaded html { scroll-behavior: smooth; }
 
     /* ===== NAVIGATION ===== */
     .nav {
@@ -76,14 +79,6 @@
     }
     .nav-brand .logo { height: 42px; width: auto; object-fit: contain; }
     .nav-brand .logo-secondary { height: 36px; width: auto; object-fit: contain; }
-    .nav-brand-text {
-      font-family: var(--font-display);
-      font-size: 1.55rem;
-      font-weight: 500;
-      color: var(--color-deep);
-      letter-spacing: 0.02em;
-    }
-    .nav-brand-text span { color: var(--color-warm); }
 
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
@@ -240,7 +235,7 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(196,154,108,0.35);
     }
-    .btn-arrow::after { content: '→'; transition: transform var(--transition); }
+    .btn-arrow::after { content: '\2192'; transition: transform var(--transition); }
     .btn-arrow:hover::after { transform: translateX(4px); }
 
     /* ===== SECTIONS ===== */
@@ -329,7 +324,12 @@
       color: var(--color-warm);
       margin-bottom: 1.2rem;
     }
-    .situation-card p { color: var(--color-muted); line-height: 1.8; font-size: 0.95rem; }
+    .situation-card p {
+      color: var(--color-muted);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      text-align: justify;
+    }
 
     /* ===== APPROACH ===== */
     .approach {
@@ -572,7 +572,6 @@
       gap: 0.75rem;
       margin-bottom: 1rem;
     }
-    .footer-brand-area img { height: 32px; width: auto; opacity: 0.9; }
     .footer-brand-text {
       font-family: var(--font-display);
       font-size: 1.3rem;
@@ -622,8 +621,17 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .hero-content { grid-template-columns: 1fr; padding-top: 7rem; }
-      .hero-image { display: none; }
+      .hero-content {
+        grid-template-columns: 1fr;
+        padding-top: 7rem;
+      }
+      /* Image AVANT le texte en mobile */
+      .hero-content {
+        display: flex;
+        flex-direction: column-reverse;
+      }
+      .hero-image img { height: 280px; }
+      .hero-image::before { display: none; }
       .situations-grid, .approach-columns, .contact-grid { grid-template-columns: 1fr; }
       .formats-grid { grid-template-columns: 1fr 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -646,6 +654,7 @@
       .form-row { grid-template-columns: 1fr; }
       section { padding: 4rem 1.25rem; }
       .nav-brand .logo-secondary { display: none; }
+      .hero-image img { height: 220px; }
     }
   </style>
 </head>
@@ -655,10 +664,8 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-brand">
-        <!-- ★ REMPLACER : images/logo1.png et images/logo2.png -->
         <img src="images/logo1.png" alt="Axe Compétences" class="logo">
         <img src="images/logo2.png" alt="" class="logo-secondary">
-        
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#accompagner" class="active">Vous accompagner</a></li>
@@ -678,14 +685,12 @@
         <div class="hero-label">Accompagnement sur mesure</div>
         <h1>L'accompagnement<br><em>qui vous éclaire</em></h1>
         <p class="hero-description">
-  Certaines situations ressemblent à un nœud de relations, d'informations et de décisions.<br>
-  Ces moments charnières demandent simplement de s'arrêter un instant,<br>
-  de prendre du recul<br>
-  et d'y voir plus clair.
-</p>
+          Certaines situations ressemblent à un noeud de relations, d'informations et de décisions.<br>
+          Ces moments charnières demandent simplement de s'arrêter un instant, de prendre du recul<br>
+          et d'y voir plus clair.
+        </p>
       </div>
       <div class="hero-image">
-        <!-- ★ REMPLACER : images/hero.jpg (paysage, min 800×600) -->
         <img src="images/hero.jpg" alt="Accompagnement professionnel - Axe Compétences" loading="eager">
       </div>
     </div>
@@ -701,9 +706,9 @@
           <blockquote>Dans ces moments, Cap Clair propose un espace de travail et de recul, à la croisée de vos dimensions personnelles et professionnelles.</blockquote>
           <p>Ces moments charnières demandent simplement de s'arrêter un instant, de prendre du recul et d'y voir plus clair.</p>
           <p>Cap Clair est un espace de travail et de recul, à la croisée de vos dimensions personnelles et professionnelles.<br>
-		  Il permet d'éclairer les choix, les tensions et les transitions avec justesse.</p>
+          Il permet d'éclairer les choix, les tensions et les transitions avec justesse.</p>
         </div>
-		<a href="#contact" class="btn btn-primary btn-arrow">Se rencontrer</a>
+        <a href="#contact" class="btn btn-primary btn-arrow">Se rencontrer</a>
       </div>
     </div>
   </section>
@@ -824,13 +829,18 @@
             <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
             <div>
               <span style="color: var(--color-slate); font-size: 0.95rem;">1 bd de Valmy<br>59650 Villeneuve d'Ascq</span>
-              <small style="margin-top: 0.5rem;">12 rue Edouard Manet<br>59880 Saint Saulve</small>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div>
+              <span style="color: var(--color-slate); font-size: 0.95rem;">12 rue Edouard Manet<br>59880 Saint Saulve</span>
             </div>
           </div>
           <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--color-muted); font-style: italic;">Échanges possibles à distance ou en présence</p>
         </div>
 
-        <!-- FORMULAIRE MAILTO — Aucune donnée ne quitte l'appareil -->
+        <!-- FORMULAIRE MAILTO -->
         <div class="reveal">
           <div class="contact-form">
             <h3>Envoyez-nous un message</h3>
@@ -838,21 +848,21 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" placeholder="Votre prénom">
+                <input type="text" id="prenom" placeholder="Votre prénom" autocomplete="off">
               </div>
               <div class="form-group">
                 <label for="nom">Nom</label>
-                <input type="text" id="nom" placeholder="Votre nom">
+                <input type="text" id="nom" placeholder="Votre nom" autocomplete="off">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="votre@email.com">
+                <input type="email" id="email" placeholder="votre@email.com" autocomplete="off">
               </div>
               <div class="form-group">
                 <label for="telephone">Téléphone</label>
-                <input type="tel" id="telephone" placeholder="06 00 00 00 00">
+                <input type="tel" id="telephone" placeholder="06 00 00 00 00" autocomplete="off">
               </div>
             </div>
             <div class="form-group">
@@ -869,7 +879,7 @@
             </div>
             <div class="form-group">
               <label for="besoin">Quel est votre besoin ?</label>
-              <textarea id="besoin" placeholder="Décrivez brièvement votre situation ou votre besoin..."></textarea>
+              <textarea id="besoin" placeholder="Décrivez brièvement votre situation ou votre besoin..." autocomplete="off"></textarea>
             </div>
             <div class="form-submit">
               <button type="button" id="sendMailBtn" class="btn btn-primary btn-arrow" style="width:100%; justify-content:center;">Ouvrir mon email</button>
@@ -889,11 +899,10 @@
     <div class="footer-inner">
       <div>
         <div class="footer-brand-area">
-          <img src="images/logo1.png" alt="Axe Compétences">
           <span class="footer-brand-text">Axe <span>Compétences</span></span>
         </div>
         <p>Accompagnement personnel et professionnel sur mesure.<br>
-		Bilans de compétences, coaching, transitions et formations.</p>
+        Bilans de compétences, coaching, transitions et formations.</p>
       </div>
       <div>
         <h4>Navigation</h4>
@@ -917,59 +926,80 @@
   </footer>
 
   <script>
+    /* ── ANTI-SCROLL : forcer le haut de page au chargement ── */
+    /* Supprime tout hash de l'URL */
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    /* Scroll immédiat en haut avant tout rendu */
+    window.scrollTo(0, 0);
+    /* Re-scroll après le chargement complet (sécurité) */
+    window.addEventListener('DOMContentLoaded', function() {
+      window.scrollTo(0, 0);
+    });
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+      /* Activer le smooth scroll seulement après que la page est en haut */
+      setTimeout(function() {
+        document.documentElement.style.scrollBehavior = 'smooth';
+      }, 100);
+    });
+
     /* ── Nav scroll ── */
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() { nav.classList.toggle('scrolled', scrollY > 50); });
 
     /* ── Mobile menu ── */
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', () => {
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', function() {
       navLinks.classList.toggle('open');
       navToggle.classList.toggle('open');
     });
-    navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.classList.remove('open');
-    }));
+    navLinks.querySelectorAll('a').forEach(function(l) {
+      l.addEventListener('click', function() {
+        navLinks.classList.remove('open');
+        navToggle.classList.remove('open');
+      });
+    });
 
     /* ── Active link on scroll ── */
-    const sects = document.querySelectorAll('section[id]');
-    const anchors = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-      let cur = '';
-      sects.forEach(s => { if (scrollY >= s.offsetTop - 120) cur = s.id; });
-      anchors.forEach(a => {
+    var sects = document.querySelectorAll('section[id]');
+    var anchors = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', function() {
+      var cur = '';
+      sects.forEach(function(s) { if (scrollY >= s.offsetTop - 120) cur = s.id; });
+      anchors.forEach(function(a) {
         a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
       });
     });
 
     /* ── Scroll reveal ── */
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e, i) {
         if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
           obs.unobserve(e.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
 
-    /* ── MAILTO — zéro donnée côté serveur ── */
+    /* ── MAILTO ── */
     document.getElementById('sendMailBtn').addEventListener('click', function () {
-      const p = document.getElementById('prenom').value.trim();
-      const n = document.getElementById('nom').value.trim();
-      const e = document.getElementById('email').value.trim();
-      const t = document.getElementById('telephone').value.trim();
-      const s = document.getElementById('sujet').value;
-      const b = document.getElementById('besoin').value.trim();
+      var p = document.getElementById('prenom').value.trim();
+      var n = document.getElementById('nom').value.trim();
+      var e = document.getElementById('email').value.trim();
+      var t = document.getElementById('telephone').value.trim();
+      var s = document.getElementById('sujet').value;
+      var b = document.getElementById('besoin').value.trim();
 
       if (!p || !n) {
         alert('Merci de renseigner au moins votre prénom et votre nom.');
         return;
       }
 
-      const body = [
+      var body = [
         'Bonjour,',
         '',
         'Je me permets de vous contacter via votre site internet.',
@@ -985,7 +1015,7 @@
         '',
         'Cordialement,',
         p + ' ' + n
-      ].filter(l => l !== null).join('\n');
+      ].filter(function(l) { return l !== null; }).join('\n');
 
       window.location.href =
         'mailto:contact@axe-c.com'
