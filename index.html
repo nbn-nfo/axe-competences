@@ -260,6 +260,19 @@
 
     /* ===== CAP CLAIR ===== */
     .cap-section { background: var(--color-white); }
+    .cap-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .cap-header-text { flex: 1; }
+    .cap-header-logo {
+      flex-shrink: 0;
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+    }
     .cap-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -277,7 +290,7 @@
       margin-bottom: 2rem;
       line-height: 1.4;
     }
-    .cap-text p { margin-bottom: 1.2rem; color: var(--color-slate); line-height: 1.85; }
+    .cap-text p { margin-bottom: 1.2rem; color: var(--color-slate); line-height: 1.85; text-align: justify; }
 
     /* ===== SITUATIONS ===== */
     .situations { background: var(--color-cream); }
@@ -354,7 +367,7 @@
       position: relative;
       z-index: 1;
     }
-    .approach-col p { color: rgba(255,255,255,0.75); line-height: 1.9; font-size: 0.97rem; }
+    .approach-col p { color: rgba(255,255,255,0.75); line-height: 1.9; font-size: 0.97rem; text-align: justify; }
     .approach-col h3 {
       font-family: var(--font-display);
       font-size: 1.3rem;
@@ -632,6 +645,7 @@
       }
       .hero-image img { height: 280px; }
       .hero-image::before { display: none; }
+      .cap-header-logo { height: 55px; }
       .situations-grid, .approach-columns, .contact-grid { grid-template-columns: 1fr; }
       .formats-grid { grid-template-columns: 1fr 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -655,10 +669,13 @@
       section { padding: 4rem 1.25rem; }
       .nav-brand .logo-secondary { display: none; }
       .hero-image img { height: 220px; }
+      .cap-header-logo { height: 45px; }
     }
   </style>
 </head>
 <body>
+  <!-- Capteur de focus invisible en haut de page -->
+  <div id="page-top" tabindex="-1" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden;" aria-hidden="true"></div>
 
   <!-- ====== NAVIGATION ====== -->
   <nav class="nav" id="nav">
@@ -699,8 +716,13 @@
   <!-- ====== CAP CLAIR ====== -->
   <section class="cap-section" id="cap">
     <div class="section-inner">
-      <div class="section-label reveal">Cap Clair</div>
-      <h2 class="section-title reveal">Un cap à clarifier ?</h2>
+      <div class="cap-header">
+        <div class="cap-header-text">
+          <div class="section-label reveal">Cap Clair</div>
+          <h2 class="section-title reveal">Un cap à clarifier ?</h2>
+        </div>
+        <img src="images/logo2.png" alt="Cap Clair" class="cap-header-logo reveal">
+      </div>
       <div class="cap-grid">
         <div class="cap-text reveal">
           <blockquote>Dans ces moments, Cap Clair propose un espace de travail et de recul, à la croisée de vos dimensions personnelles et professionnelles.</blockquote>
@@ -848,26 +870,26 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" placeholder="Votre prénom" autocomplete="off">
+                <input type="text" id="prenom" placeholder="Votre prénom" autocomplete="off" tabindex="-1">
               </div>
               <div class="form-group">
                 <label for="nom">Nom</label>
-                <input type="text" id="nom" placeholder="Votre nom" autocomplete="off">
+                <input type="text" id="nom" placeholder="Votre nom" autocomplete="off" tabindex="-1">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" placeholder="votre@email.com" autocomplete="off">
+                <input type="email" id="email" placeholder="votre@email.com" autocomplete="off" tabindex="-1">
               </div>
               <div class="form-group">
                 <label for="telephone">Téléphone</label>
-                <input type="tel" id="telephone" placeholder="06 00 00 00 00" autocomplete="off">
+                <input type="tel" id="telephone" placeholder="06 00 00 00 00" autocomplete="off" tabindex="-1">
               </div>
             </div>
             <div class="form-group">
               <label for="sujet">Sujet</label>
-              <select id="sujet">
+              <select id="sujet" tabindex="-1">
                 <option value="Demande d'information">Demande d'information</option>
                 <option value="Accompagnement personnel">Accompagnement personnel</option>
                 <option value="Accompagnement professionnel">Accompagnement professionnel</option>
@@ -879,7 +901,7 @@
             </div>
             <div class="form-group">
               <label for="besoin">Quel est votre besoin ?</label>
-              <textarea id="besoin" placeholder="Décrivez brièvement votre situation ou votre besoin..." autocomplete="off"></textarea>
+              <textarea id="besoin" placeholder="Décrivez brièvement votre situation ou votre besoin..." autocomplete="off" tabindex="-1"></textarea>
             </div>
             <div class="form-submit">
               <button type="button" id="sendMailBtn" class="btn btn-primary btn-arrow" style="width:100%; justify-content:center;">Ouvrir mon email</button>
@@ -920,30 +942,68 @@
       </div>
     </div>
     <div class="footer-bottom">
-      AXE COMPETENCES – 1 bd de Valmy – 59650 VILLENEUVE D'ASCQ<br>
+      AXE COMPETENCES <br>1 bd de Valmy – 59650 VILLENEUVE D'ASCQ<br>
       APE : 8559 A · N° déclaration d'activité Formation Professionnelle Continue : 32590972159 · SIRET : 832 416 275 00028
     </div>
   </footer>
 
   <script>
-    /* ── ANTI-SCROLL : forcer le haut de page au chargement ── */
-    /* Supprime tout hash de l'URL */
+    /* ══════════════════════════════════════════════
+       ANTI-SCROLL — Empêche tout défilement auto
+       ══════════════════════════════════════════════ */
+    /* 1. Supprimer le hash */
     if (window.location.hash) {
       history.replaceState(null, '', window.location.pathname + window.location.search);
     }
-    /* Scroll immédiat en haut avant tout rendu */
-    window.scrollTo(0, 0);
-    /* Re-scroll après le chargement complet (sécurité) */
-    window.addEventListener('DOMContentLoaded', function() {
-      window.scrollTo(0, 0);
+    /* 2. Forcer le scroll en haut immédiatement */
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+    /* 3. Bloquer TOUT scroll pendant le chargement */
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    /* 4. Empêcher le focus automatique sur tout élément */
+    document.addEventListener('DOMContentLoaded', function() {
+      /* Retirer le focus de tout élément qui l'aurait reçu */
+      if (document.activeElement && document.activeElement !== document.body) {
+        document.activeElement.blur();
+      }
+      /* Forcer en haut */
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+      /* 5. Débloquer le scroll après un court délai */
+      setTimeout(function() {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }, 50);
     });
+
     window.addEventListener('load', function() {
-      window.scrollTo(0, 0);
-      /* Activer le smooth scroll seulement après que la page est en haut */
+      /* Encore une fois au cas où */
+      if (document.activeElement && document.activeElement !== document.body) {
+        document.activeElement.blur();
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+      /* Activer le smooth scroll seulement maintenant */
       setTimeout(function() {
         document.documentElement.style.scrollBehavior = 'smooth';
-      }, 100);
+      }, 200);
     });
+
+    /* 6. Intercepter toute tentative de scroll pendant 500ms */
+    var scrollLocked = true;
+    var scrollLockHandler = function(e) {
+      if (scrollLocked) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
+    };
+    window.addEventListener('scroll', scrollLockHandler);
+    setTimeout(function() {
+      scrollLocked = false;
+      window.removeEventListener('scroll', scrollLockHandler);
+    }, 500);
 
     /* ── Nav scroll ── */
     var nav = document.getElementById('nav');
@@ -986,6 +1046,22 @@
     document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
 
     /* ── MAILTO ── */
+    /* Réactiver les champs du formulaire quand l'utilisateur scroll jusqu'au contact */
+    var formActivated = false;
+    var formObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !formActivated) {
+          formActivated = true;
+          document.querySelectorAll('.contact-form input, .contact-form textarea, .contact-form select').forEach(function(el) {
+            el.removeAttribute('tabindex');
+          });
+          formObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    var contactForm = document.querySelector('.contact-form');
+    if (contactForm) formObserver.observe(contactForm);
+
     document.getElementById('sendMailBtn').addEventListener('click', function () {
       var p = document.getElementById('prenom').value.trim();
       var n = document.getElementById('nom').value.trim();
