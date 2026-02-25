@@ -10,6 +10,7 @@
   <meta property="og:description" content="Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions professionnelles.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="images/hero.jpg">
+  <link rel="icon" type="image/png" href="images/logo1.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -75,6 +76,14 @@
     }
     .nav-brand .logo { height: 42px; width: auto; object-fit: contain; }
     .nav-brand .logo-secondary { height: 36px; width: auto; object-fit: contain; }
+    .nav-brand-text {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 500;
+      color: var(--color-deep);
+      letter-spacing: 0.02em;
+    }
+    .nav-brand-text span { color: var(--color-warm); }
 
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
@@ -563,6 +572,7 @@
       gap: 0.75rem;
       margin-bottom: 1rem;
     }
+    .footer-brand-area img { height: 32px; width: auto; opacity: 0.9; }
     .footer-brand-text {
       font-family: var(--font-display);
       font-size: 1.3rem;
@@ -612,17 +622,8 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        padding-top: 7rem;
-      }
-      /* Hero image reste visible en mobile, adaptée */
-      .hero-image img {
-        height: 280px;
-      }
-      .hero-image::before {
-        display: none;
-      }
+      .hero-content { grid-template-columns: 1fr; padding-top: 7rem; }
+      .hero-image { display: none; }
       .situations-grid, .approach-columns, .contact-grid { grid-template-columns: 1fr; }
       .formats-grid { grid-template-columns: 1fr 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -645,9 +646,6 @@
       .form-row { grid-template-columns: 1fr; }
       section { padding: 4rem 1.25rem; }
       .nav-brand .logo-secondary { display: none; }
-      .hero-image img {
-        height: 220px;
-      }
     }
   </style>
 </head>
@@ -657,8 +655,10 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-brand">
+        <!-- ★ REMPLACER : images/logo1.png et images/logo2.png -->
         <img src="images/logo1.png" alt="Axe Compétences" class="logo">
         <img src="images/logo2.png" alt="" class="logo-secondary">
+        
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#accompagner" class="active">Vous accompagner</a></li>
@@ -678,12 +678,14 @@
         <div class="hero-label">Accompagnement sur mesure</div>
         <h1>L'accompagnement<br><em>qui vous éclaire</em></h1>
         <p class="hero-description">
-          Certaines situations ressemblent à un nœud de relations, d'informations et de décisions.<br>
-          Ces moments charnières demandent simplement de s'arrêter un instant, de prendre du recul<br>
-          et d'y voir plus clair.
-        </p>
+  Certaines situations ressemblent à un nœud de relations, d'informations et de décisions.<br>
+  Ces moments charnières demandent simplement de s'arrêter un instant,<br>
+  de prendre du recul<br>
+  et d'y voir plus clair.
+</p>
       </div>
       <div class="hero-image">
+        <!-- ★ REMPLACER : images/hero.jpg (paysage, min 800×600) -->
         <img src="images/hero.jpg" alt="Accompagnement professionnel - Axe Compétences" loading="eager">
       </div>
     </div>
@@ -699,9 +701,9 @@
           <blockquote>Dans ces moments, Cap Clair propose un espace de travail et de recul, à la croisée de vos dimensions personnelles et professionnelles.</blockquote>
           <p>Ces moments charnières demandent simplement de s'arrêter un instant, de prendre du recul et d'y voir plus clair.</p>
           <p>Cap Clair est un espace de travail et de recul, à la croisée de vos dimensions personnelles et professionnelles.<br>
-          Il permet d'éclairer les choix, les tensions et les transitions avec justesse.</p>
+		  Il permet d'éclairer les choix, les tensions et les transitions avec justesse.</p>
         </div>
-        <a href="#contact" class="btn btn-primary btn-arrow">Se rencontrer</a>
+		<a href="#contact" class="btn btn-primary btn-arrow">Se rencontrer</a>
       </div>
     </div>
   </section>
@@ -828,7 +830,7 @@
           <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--color-muted); font-style: italic;">Échanges possibles à distance ou en présence</p>
         </div>
 
-        <!-- FORMULAIRE MAILTO -->
+        <!-- FORMULAIRE MAILTO — Aucune donnée ne quitte l'appareil -->
         <div class="reveal">
           <div class="contact-form">
             <h3>Envoyez-nous un message</h3>
@@ -887,10 +889,11 @@
     <div class="footer-inner">
       <div>
         <div class="footer-brand-area">
+          <img src="images/logo1.png" alt="Axe Compétences">
           <span class="footer-brand-text">Axe <span>Compétences</span></span>
         </div>
         <p>Accompagnement personnel et professionnel sur mesure.<br>
-        Bilans de compétences, coaching, transitions et formations.</p>
+		Bilans de compétences, coaching, transitions et formations.</p>
       </div>
       <div>
         <h4>Navigation</h4>
@@ -914,14 +917,6 @@
   </footer>
 
   <script>
-    /* ── Forcer le scroll en haut au chargement ── */
-    if (window.location.hash) {
-      history.replaceState(null, '', window.location.pathname);
-    }
-    window.addEventListener('load', function() {
-      setTimeout(function() { window.scrollTo(0, 0); }, 0);
-    });
-
     /* ── Nav scroll ── */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
@@ -959,14 +954,6 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-    /* ── Empêcher l'autofocus sur les champs du formulaire ── */
-    document.querySelectorAll('.contact-form input, .contact-form textarea, .contact-form select').forEach(el => {
-      el.setAttribute('tabindex', '-1');
-      el.addEventListener('focus', function() {
-        this.removeAttribute('tabindex');
-      }, { once: true });
-    });
 
     /* ── MAILTO — zéro donnée côté serveur ── */
     document.getElementById('sendMailBtn').addEventListener('click', function () {
