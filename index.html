@@ -384,27 +384,31 @@
       margin-top: 2.5rem;
       position: relative;
       z-index: 1;
-      align-items: start;
+      align-items: center;
     }
     .approach-image {
       position: relative;
       border-radius: 4px;
-      overflow: hidden;
+      overflow: visible;
     }
     .approach-image img {
       width: 100%;
-      height: 100%;
-      min-height: 420px;
+      height: 480px;
       object-fit: cover;
       border-radius: 4px;
       display: block;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
     }
-    .approach-image::after {
+    .approach-image::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(26,35,50,0.1) 0%, rgba(26,35,50,0.25) 100%);
+      top: -15px; left: -15px;
+      width: 100%; height: 100%;
+      border: 1px solid rgba(196,154,108,0.3);
       border-radius: 4px;
+      z-index: 0;
     }
     .approach-cards {
       display: flex;
@@ -729,9 +733,9 @@
         grid-template-columns: 1fr;
       }
       .approach-image img {
-        min-height: 260px;
-        max-height: 320px;
+        height: 280px;
       }
+      .approach-image::before { display: none; }
     }
     @media (max-width: 640px) {
       .nav-links { display: none; }
