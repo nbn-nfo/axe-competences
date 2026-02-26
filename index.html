@@ -6,13 +6,31 @@
   <title>Axe Compétences</title>
   <meta name="description" content="Axe Compétences - Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions professionnelles à Villeneuve d'Ascq.">
   <meta name="keywords" content="accompagnement, coaching, bilan de compétences, transition professionnelle, Villeneuve d'Ascq, formation">
+  <!-- ═══ Sécurité ═══ -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" 
+    content="default-src 'self'; 
+             script-src 'self' 'unsafe-inline'; 
+             style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
+             font-src https://fonts.gstatic.com; 
+             img-src 'self' data:; 
+             connect-src 'self'; 
+             frame-ancestors 'none'; 
+             base-uri 'self'; 
+             form-action 'self' mailto:;">
+  <!-- ═══ Open Graph ═══ -->
   <meta property="og:title" content="Axe Compétences | Accompagnement sur mesure">
   <meta property="og:description" content="Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions professionnelles.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="images/hero.jpg">
+  <meta property="og:url" content="https://www.axe-c.com/">
+  <meta property="og:image" content="https://www.axe-c.com/images/hero.jpg">
+  <link rel="canonical" href="https://www.axe-c.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" crossorigin="anonymous">
   <style>
     :root {
       --color-deep: #1a2332;
@@ -1046,7 +1064,7 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
 
-    /* ── MAILTO ── */
+    /* ── MAILTO (sécurisé) ── */
     /* Réactiver les champs du formulaire quand l'utilisateur scroll jusqu'au contact */
     var formActivated = false;
     var formObserver = new IntersectionObserver(function(entries) {
@@ -1063,16 +1081,38 @@
     var contactForm = document.querySelector('.contact-form');
     if (contactForm) formObserver.observe(contactForm);
 
+    /* Fonction de sanitisation pour éviter l'injection mailto */
+    function sanitizeInput(str) {
+      return str
+        .replace(/[\r\n]/g, ' ')      /* Supprime les retours à la ligne (injection header) */
+        .replace(/[<>]/g, '')          /* Supprime les chevrons HTML */
+        .replace(/%0[aAdD]/gi, '')     /* Supprime les encodages URL de CR/LF */
+        .trim()
+        .substring(0, 500);            /* Limite la longueur */
+    }
+
     document.getElementById('sendMailBtn').addEventListener('click', function () {
-      var p = document.getElementById('prenom').value.trim();
-      var n = document.getElementById('nom').value.trim();
-      var e = document.getElementById('email').value.trim();
-      var t = document.getElementById('telephone').value.trim();
-      var s = document.getElementById('sujet').value;
-      var b = document.getElementById('besoin').value.trim();
+      var p = sanitizeInput(document.getElementById('prenom').value);
+      var n = sanitizeInput(document.getElementById('nom').value);
+      var e = sanitizeInput(document.getElementById('email').value);
+      var t = sanitizeInput(document.getElementById('telephone').value);
+      var s = sanitizeInput(document.getElementById('sujet').value);
+      var b = sanitizeInput(document.getElementById('besoin').value);
 
       if (!p || !n) {
         alert('Merci de renseigner au moins votre prénom et votre nom.');
+        return;
+      }
+
+      /* Validation email basique si renseigné */
+      if (e && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
+        alert('L\'adresse email semble invalide.');
+        return;
+      }
+
+      /* Validation téléphone basique si renseigné */
+      if (t && !/^[\d\s\+\-\.\(\)]{6,20}$/.test(t)) {
+        alert('Le numéro de téléphone semble invalide.');
         return;
       }
 

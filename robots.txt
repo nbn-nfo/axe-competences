@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.axe-c.com/sitemap.xml
+
+# Bloquer l'accès aux ressources internes GitHub
+User-agent: *
+Disallow: /.git/
