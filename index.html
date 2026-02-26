@@ -257,7 +257,7 @@
     .btn-arrow:hover::after { transform: translateX(4px); }
 
     /* ===== SECTIONS ===== */
-    section { padding: 6rem 2rem; }
+    section { padding: 4rem 2rem; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
     .section-label {
       font-size: 0.72rem;
@@ -294,8 +294,8 @@
     .cap-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-top: 3rem;
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
     .cap-text blockquote {
       font-family: var(--font-display);
@@ -315,8 +315,8 @@
     .situations-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      margin-top: 3rem;
+      gap: 2rem;
+      margin-top: 2rem;
     }
     .situation-card {
       background: var(--color-white);
@@ -377,21 +377,76 @@
       background: radial-gradient(ellipse at center, rgba(196,154,108,0.08) 0%, transparent 70%);
     }
     .approach .section-title { color: var(--color-white); }
-    .approach-columns {
+    .approach-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1.2fr;
       gap: 3rem;
-      margin-top: 3rem;
+      margin-top: 2.5rem;
       position: relative;
       z-index: 1;
+      align-items: start;
     }
-    .approach-col p { color: rgba(255,255,255,0.75); line-height: 1.9; font-size: 0.97rem; text-align: justify; }
-    .approach-col h3 {
+    .approach-image {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .approach-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+    }
+    .approach-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(26,35,50,0.1) 0%, rgba(26,35,50,0.25) 100%);
+      border-radius: 4px;
+    }
+    .approach-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .approach-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(196,154,108,0.2);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .approach-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 0;
+      background: var(--color-warm);
+      transition: height var(--transition);
+    }
+    .approach-card:hover::before { height: 100%; }
+    .approach-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+    .approach-card h3 {
       font-family: var(--font-display);
       font-size: 1.3rem;
       font-weight: 400;
       color: var(--color-warm-light);
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
+    }
+    .approach-card p { color: rgba(255,255,255,0.75); line-height: 1.85; font-size: 0.95rem; text-align: justify; }
+    .approach-card .approach-note {
+      margin-top: 0.8rem;
+      color: var(--color-warm-light);
+      font-style: italic;
+      font-size: 0.92rem;
     }
 
     /* ===== FORMATS ===== */
@@ -400,7 +455,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      margin-top: 3rem;
+      margin-top: 2rem;
     }
     .format-item {
       padding: 2rem;
@@ -442,7 +497,7 @@
     }
 
     /* ===== CTA BAND ===== */
-    .cta-band { background: var(--color-ivory); padding: 4rem 2rem; text-align: center; }
+    .cta-band { background: var(--color-ivory); padding: 3rem 2rem; text-align: center; }
     .cta-band p {
       font-family: var(--font-display);
       font-size: clamp(1.3rem, 2.5vw, 1.8rem);
@@ -652,6 +707,8 @@
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
+      /* Restaurer le padding mobile pour les sections */
+      section { padding: 5rem 2rem; }
       .hero-content {
         grid-template-columns: 1fr;
         padding-top: 7rem;
@@ -664,9 +721,17 @@
       .hero-image img { height: 280px; }
       .hero-image::before { display: none; }
       .cap-header-logo { height: 55px; }
-      .situations-grid, .approach-columns, .contact-grid { grid-template-columns: 1fr; }
+      .situations-grid, .contact-grid { grid-template-columns: 1fr; }
       .formats-grid { grid-template-columns: 1fr 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      /* Approach : image en haut, cards en dessous */
+      .approach-layout {
+        grid-template-columns: 1fr;
+      }
+      .approach-image img {
+        min-height: 260px;
+        max-height: 320px;
+      }
     }
     @media (max-width: 640px) {
       .nav-links { display: none; }
@@ -749,7 +814,7 @@
           <p>Cap Clair est un espace de travail et de recul, à la croisée de vos dimensions personnelles et professionnelles.<br>
           Il permet d'éclairer les choix, les tensions et les transitions avec justesse.</p>
         </div>
-        <a href="#contact" class="btn btn-primary btn-arrow">Se rencontrer</a>
+        <a href="#contact" class="btn btn-primary btn-arrow" style="justify-self: start;">Se rencontrer</a>
       </div>
     </div>
   </section>
@@ -789,15 +854,20 @@
     <div class="section-inner">
       <div class="section-label reveal" style="color: var(--color-warm-light);">Notre démarche</div>
       <h2 class="section-title reveal">Un accompagnement ajusté,<br>une posture professionnelle exigeante</h2>
-      <div class="approach-columns">
-        <div class="approach-col reveal">
-          <h3>Démarche d'accompagnement</h3>
-          <p>Notre démarche est attentive aux mouvements subtils : à ce qui émerge dans l'échange, aux tensions discrètes, aux prises de conscience en devenir. Elle se déploie au rythme de la situation, dans le juste moment. La clarté n'est jamais seulement intellectuelle : elle naît dans le dialogue et l'expérience.</p>
-          <p style="margin-top: 1rem; color: var(--color-warm-light); font-style: italic;">En présence et/ou à distance.</p>
+      <div class="approach-layout">
+        <div class="approach-image reveal">
+          <img src="images/demarche.jpg" alt="Espace d'accompagnement - Axe Compétences" loading="lazy">
         </div>
-        <div class="approach-col reveal">
-          <h3>Posture professionnelle</h3>
-          <p>Les accompagnements sont conduits par des intervenants expérimentés, issus des champs de la formation, de la gestion et de l'accompagnement des personnes et des organisations. Leur travail repose sur une écoute exigeante, une attention particulière aux moments clés, une solide expérience de terrain et une capacité à intervenir dans des contextes complexes, sans appliquer de solutions standardisées.</p>
+        <div class="approach-cards">
+          <div class="approach-card reveal">
+            <h3>Démarche d'accompagnement</h3>
+            <p>Notre démarche est attentive aux mouvements subtils : à ce qui émerge dans l'échange, aux tensions discrètes, aux prises de conscience en devenir. Elle se déploie au rythme de la situation, dans le juste moment. La clarté n'est jamais seulement intellectuelle : elle naît dans le dialogue et l'expérience.</p>
+            <p class="approach-note">En présence et/ou à distance.</p>
+          </div>
+          <div class="approach-card reveal">
+            <h3>Posture professionnelle</h3>
+            <p>Les accompagnements sont conduits par des intervenants expérimentés, issus des champs de la formation, de la gestion et de l'accompagnement des personnes et des organisations. Leur travail repose sur une écoute exigeante, une attention particulière aux moments clés, une solide expérience de terrain et une capacité à intervenir dans des contextes complexes, sans appliquer de solutions standardisées.</p>
+          </div>
         </div>
       </div>
     </div>
