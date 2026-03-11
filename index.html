@@ -464,12 +464,12 @@ a<!DOCTYPE html>
     .formats { background: var(--color-white); }
     .formats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
       margin-top: 2rem;
     }
     .format-item {
-      padding: 2rem;
+      padding: 2.2rem;
       background: var(--color-cream);
       border-radius: 4px;
       border: 1px solid transparent;
@@ -501,10 +501,16 @@ a<!DOCTYPE html>
     }
     .format-item h3 {
       font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 500;
       color: var(--color-deep);
       line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .format-item p {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 1.6;
     }
 
     /* ===== CTA BAND ===== */
@@ -968,28 +974,24 @@ a<!DOCTYPE html>
       <h2 class="section-title reveal">Formats d'accompagnement<br>adaptés à votre contexte</h2>
       <div class="formats-grid">
         <div class="format-item reveal">
-          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <h3>Accompagnement des dirigeants, des équipes et des organisations</h3>
-        </div>
-        <div class="format-item reveal">
-          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-          <h3>Bilans de compétences et de parcours - Transitions pro</h3>
-        </div>
-        <div class="format-item reveal">
-          <div class="format-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></div>
-          <h3>Coaching personnel et professionnel</h3>
+          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Dirigeants et organisations</h3>
+          <p>Décisions sensibles · Dynamiques relationnelles · Création et Transformation</p>
         </div>
         <div class="format-item reveal">
           <div class="format-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <h3>Orientation et trajectoires d'études</h3>
+          <h3>Parcours d'accompagnement</h3>
+          <p>Clarifier · Décider · Avancer</p>
+        </div>
+        <div class="format-item reveal">
+          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <h3>Bilans de compétences et VAE</h3>
+          <p>Projet professionnel · Reconversion · Valorisation de l'expérience</p>
         </div>
         <div class="format-item reveal">
           <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-          <h3>Accompagnement des créateurs d'entreprise - Projets retraite</h3>
-        </div>
-        <div class="format-item reveal">
-          <div class="format-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Formations humaines et à l'encadrement</h3>
+          <h3>Management et relations humaines</h3>
+          <p>Formations Leadership · Relations d'équipe · Posture managériale</p>
         </div>
       </div>
     </div>
@@ -1043,7 +1045,7 @@ a<!DOCTYPE html>
         <div class="reveal">
           <div class="contact-form">
             <h3>Envoyez-nous un message</h3>
-            <p class="form-intro">Remplissez le formulaire. Votre messagerie s'ouvrira avec un email pré-rempli — aucune donnée n'est collectée.</p>
+            <p class="form-intro">Pour toute demande spécifique ou liée au handicap, veuillez remplir le formulaire.</p>
             <div class="form-row">
               <div class="form-group">
                 <label for="prenom">Prénom</label>
