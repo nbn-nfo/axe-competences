@@ -1,11 +1,10 @@
-a<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Axe Compétences</title>
+  <title>Axe Compétences | Bilan de compétences, coaching et accompagnement à Lille</title>
   <meta name="description" content="Axe Compétences - Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions professionnelles à Villeneuve d'Ascq.">
-  <meta name="keywords" content="accompagnement, coaching, bilan de compétences, transition professionnelle, Villeneuve d'Ascq, formation">
   <!-- ═══ Sécurité ═══ -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
@@ -25,6 +24,10 @@ a<!DOCTYPE html>
   <meta property="og:title" content="Axe Compétences | Accompagnement sur mesure">
   <meta property="og:description" content="Accompagnement personnel et professionnel sur mesure. Bilans de compétences, coaching, transitions professionnelles.">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Axe Compétences">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="750">
   <meta property="og:url" content="https://www.axe-c.com/">
   <meta property="og:image" content="https://www.axe-c.com/images/hero.jpg">
   <link rel="canonical" href="https://www.axe-c.com/">
@@ -354,7 +357,9 @@ a<!DOCTYPE html>
       color: var(--color-deep);
       margin-bottom: 1rem;
     }
+    .situation-card .situation-label,
     .situation-card h4 {
+      display: block;
       font-size: 0.72rem;
       font-weight: 600;
       text-transform: uppercase;
@@ -851,6 +856,141 @@ a<!DOCTYPE html>
       .cap-header-logo { height: 45px; }
     }
   </style>
+  <!-- ═══ Données structurées (SEO + LLM) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "EducationalOrganization"],
+        "@id": "https://www.axe-c.com/#organization",
+        "name": "Axe Compétences",
+        "alternateName": "AXE - COMPETENCES",
+        "url": "https://www.axe-c.com",
+        "logo": "https://www.axe-c.com/images/logo1.png",
+        "image": "https://www.axe-c.com/images/hero.jpg",
+        "description": "Cabinet d'accompagnement personnel et professionnel certifié Qualiopi, basé dans la Métropole de Lille. Bilans de compétences, coaching, VAE, formations management.",
+        "foundingDate": "2017",
+        "taxID": "832 416 275 00028",
+        "telephone": "+33684802902",
+        "email": "contact@axe-c.com",
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "1 boulevard de Valmy",
+            "addressLocality": "Villeneuve-d'Ascq",
+            "postalCode": "59650",
+            "addressRegion": "Hauts-de-France",
+            "addressCountry": "FR"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "12 rue Edouard Manet",
+            "addressLocality": "Saint-Saulve",
+            "postalCode": "59880",
+            "addressRegion": "Hauts-de-France",
+            "addressCountry": "FR"
+          }
+        ],
+        "areaServed": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "latitude": 50.6292,
+            "longitude": 3.0573
+          },
+          "geoRadius": "50000"
+        },
+        "hasCredential": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Qualiopi",
+          "description": "Certification qualité délivrée au titre des actions de formation, bilans de compétences et actions de VAE"
+        },
+        "knowsAbout": [
+          "Bilan de compétences",
+          "Coaching professionnel",
+          "Coaching personnel",
+          "VAE - Validation des Acquis de l'Expérience",
+          "Accompagnement des dirigeants",
+          "Formation management",
+          "Transition professionnelle",
+          "Reconversion professionnelle"
+        ],
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Bilan de compétences",
+              "description": "Bilan de compétences certifié Qualiopi, éligible CPF. Accompagnement individuel pour clarifier son projet professionnel, envisager une reconversion ou valoriser son expérience.",
+              "provider": {"@id": "https://www.axe-c.com/#organization"},
+              "areaServed": "Métropole de Lille, Hauts-de-France",
+              "serviceType": "Bilan de compétences"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Coaching professionnel et personnel",
+              "description": "Parcours d'accompagnement individuel pour clarifier une situation, prendre du recul et avancer dans ses choix professionnels et personnels.",
+              "provider": {"@id": "https://www.axe-c.com/#organization"},
+              "areaServed": "Métropole de Lille, Hauts-de-France"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "VAE - Validation des Acquis de l'Expérience",
+              "description": "Accompagnement VAE certifié Qualiopi pour faire reconnaître et valoriser son expérience professionnelle par un diplôme ou une certification.",
+              "provider": {"@id": "https://www.axe-c.com/#organization"},
+              "areaServed": "Métropole de Lille, Hauts-de-France"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Accompagnement des dirigeants et organisations",
+              "description": "Accompagnement des dirigeants, équipes et organisations dans leurs décisions sensibles, dynamiques relationnelles et phases de transformation.",
+              "provider": {"@id": "https://www.axe-c.com/#organization"},
+              "areaServed": "Métropole de Lille, Hauts-de-France"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Formations management et relations humaines",
+              "description": "Formations en leadership, relations d'équipe et posture managériale pour les encadrants et responsables.",
+              "provider": {"@id": "https://www.axe-c.com/#organization"},
+              "areaServed": "Métropole de Lille, Hauts-de-France"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.axe-c.com/#website",
+        "url": "https://www.axe-c.com",
+        "name": "Axe Compétences",
+        "publisher": {"@id": "https://www.axe-c.com/#organization"},
+        "inLanguage": "fr-FR"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.axe-c.com/",
+        "url": "https://www.axe-c.com/",
+        "name": "Axe Compétences | Bilan de compétences, coaching et accompagnement à Lille",
+        "description": "Cabinet d'accompagnement certifié Qualiopi à Villeneuve-d'Ascq. Bilans de compétences, coaching, VAE, formations management dans la Métropole de Lille.",
+        "isPartOf": {"@id": "https://www.axe-c.com/#website"},
+        "about": {"@id": "https://www.axe-c.com/#organization"},
+        "inLanguage": "fr-FR"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <!-- Capteur de focus invisible en haut de page -->
@@ -860,7 +1000,7 @@ a<!DOCTYPE html>
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-brand">
-        <img src="images/logo1.png" alt="Axe Compétences" class="logo">
+        <img src="images/logo1.png" alt="Axe Compétences" width="584" height="150" class="logo">
         <img src="images/logo2.png" alt="" class="logo-secondary">
       </a>
       <ul class="nav-links" id="navLinks">
@@ -874,6 +1014,7 @@ a<!DOCTYPE html>
     </div>
   </nav>
 
+  <main>
   <!-- ====== HERO ====== -->
   <section class="hero" id="accompagner">
     <div class="hero-content">
@@ -888,7 +1029,7 @@ a<!DOCTYPE html>
         </p>
       </div>
       <div class="hero-image">
-        <img src="images/hero.jpg" alt="Accompagnement professionnel - Axe Compétences" loading="eager">
+        <img src="images/hero.jpg" alt="Accompagnement professionnel - Axe Compétences" width="1200" height="750" loading="eager">
       </div>
     </div>
   </section>
@@ -920,22 +1061,22 @@ a<!DOCTYPE html>
       <h2 class="section-title reveal">Pour les particuliers<br>et les organisations</h2>
       <div class="situations-grid">
         <div class="situation-card reveal">
-          <h4>Particuliers</h4>
+          <span class="situation-label">Particuliers</span>
           <h3>Vos questionnements personnels</h3>
           <p>Jeunes adultes en questionnement, actifs en transition ou en tension, seniors à un moment de bascule. Les échanges peuvent porter sur la trajectoire professionnelle, le développement personnel et relationnel, ou encore le rapport au sens, aux transitions et aux choix de vie importants.</p>
         </div>
         <div class="situation-card reveal">
-          <h4>Organisations</h4>
+          <span class="situation-label">Organisations</span>
           <h3>Vos dynamiques</h3>
           <p>Dirigeants, responsables et équipes confrontés à des situations délicates, à des projets sensibles ou à des phases d'évolution. Les échanges concernent la posture de responsabilité, les dynamiques relationnelles et managériales, ainsi que les phases de transformation ou de redéfinition collective.</p>
         </div>
         <div class="situation-card reveal">
-          <h4>Enjeux particuliers</h4>
+          <span class="situation-label">Enjeux particuliers</span>
           <h3>Vos trajectoires et choix de carrière</h3>
           <p>Reconversion, période de questionnement, préparation de la retraite, développement personnel et relationnel, rapport au sens et aux choix de vie importants.</p>
         </div>
         <div class="situation-card reveal">
-          <h4>Enjeux organisations</h4>
+          <span class="situation-label">Enjeux organisations</span>
           <h3>Vos postures de décisions</h3>
           <p>Posture de responsabilité et prise de décision, dynamiques relationnelles et managériales, phases de transformation, de tension ou de redéfinition collective.</p>
         </div>
@@ -950,7 +1091,7 @@ a<!DOCTYPE html>
       <h2 class="section-title reveal">Un accompagnement ajusté,<br>une posture professionnelle exigeante</h2>
       <div class="approach-layout">
         <div class="approach-image reveal">
-          <img src="images/demarche.jpg" alt="Espace d'accompagnement - Axe Compétences" loading="lazy">
+          <img src="images/demarche.jpg" alt="Espace d'accompagnement - Axe Compétences" width="665" height="678" loading="lazy">
         </div>
         <div class="approach-cards">
           <div class="approach-card reveal">
@@ -1113,6 +1254,8 @@ a<!DOCTYPE html>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ====== FOOTER ====== -->
   <footer class="footer">
